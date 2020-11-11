@@ -1,13 +1,17 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { FriendsContext } from './FriendsContext';
+import friendsReducer from './FriendsReducer';
 import HomeScreen from './HomeScreen';
 import FriendsScreen from './FriendsScreen';
 
 const Stack = createStackNavigator();
+
+const store = createStore(friendsReducer);
 
 class App extends React.Component {
   constructor(props) {
@@ -43,15 +47,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <FriendsContext.Provider
-        value={
-          {
-            currentFriends: this.state.currentFriends,
-            possibleFriends: this.state.possibleFriends,
-            addFriend: this.addFriend
-          }
-        }
-      >
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -64,7 +60,7 @@ class App extends React.Component {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FriendsContext.Provider>
+      </Provider>
     );
   }
 }

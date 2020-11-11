@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { FriendsContext } from './FriendsContext';
+import { addFriend } from './FriendsActions';
 
 class FriendsScreen extends React.Component {
   render() {
@@ -9,12 +11,12 @@ class FriendsScreen extends React.Component {
         <Text>Add friends here!</Text>
 
         {
-          this.context.possibleFriends.map((friend, index) => (
+          this.props.friends.possible.map((friend, index) => (
             <Button
               key={ friend }
-              title={ `Add ${ friend }` }
+              title={ `Add ${ friend }`}
               onPress={() =>
-                this.context.addFriend(index)
+                this.props.addFriend(index)
               }
             />
           ))
@@ -30,7 +32,6 @@ class FriendsScreen extends React.Component {
     );
   }
 }
-FriendsScreen.contextType = FriendsContext;
 
 const styles = StyleSheet.create({
   container: {
@@ -41,4 +42,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FriendsScreen;
+const mapStateToProps = (state) => {
+  const { friends } = state
+  return { friends }
+};
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addFriend,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsScreen);
