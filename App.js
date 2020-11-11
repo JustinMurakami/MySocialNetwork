@@ -14,6 +14,37 @@ const Stack = createStackNavigator();
 const store = createStore(friendsReducer);
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      possibleFriends: [
+        'Alice',
+        'Bob',
+        'Sammy',
+      ],
+      currentFriends: [],
+    }
+  }
+
+  addFriend = (index) => {
+    const {
+      currentFriends,
+      possibleFriends,
+    } = this.state
+
+    // Pull friend out of possibleFriends
+    const addedFriend = possibleFriends.splice(index, 1)
+
+    // And put friend in currentFriends
+    currentFriends.push(addedFriend)
+
+    // Finally, update the app state
+    this.setState({
+      currentFriends,
+      possibleFriends,
+    })
+  }
+
   render() {
     return (
       <Provider store={store}>

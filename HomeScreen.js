@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { FriendsContext } from './FriendsContext';
 
 class HomeScreen extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class HomeScreen extends React.Component {
     );
   }
 }
+HomeScreen.contextType = FriendsContext;
 
 const styles = StyleSheet.create({
   container: {
