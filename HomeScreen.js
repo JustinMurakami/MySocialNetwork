@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 class HomeScreen extends React.Component {
@@ -27,4 +28,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  const { friends } = state
+  return { friends }
+}
+
+export default connect(mapStateToProps)(HomeScreen);
