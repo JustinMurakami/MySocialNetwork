@@ -1,6 +1,7 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
+import { ADD_FRIEND } from './types';
 
-const INITIAL_State = {
+const INITIAL_STATE = {
   current: [],
   possible: [
     'Alice',
@@ -11,7 +12,7 @@ const INITIAL_State = {
 
 const friendsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'ADD_FRIEND':
+    case ADD_FRIEND:
       const { current, possible, } = state;
       const addedFriend = possible.splice(action.payload, 1);
       current.push(addedFriend);
