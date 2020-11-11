@@ -6,7 +6,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>You have (undefined) friends.</Text>
+        <Text>You have { this.props.friends.current.length } friends.</Text>
 
         <Button
           title="Add some friends"
